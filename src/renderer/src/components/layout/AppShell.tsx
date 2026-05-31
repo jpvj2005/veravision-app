@@ -22,6 +22,8 @@ interface AppHeaderProps {
   onMenuClick: () => void
   onLogoClick: () => void
   onNewReminder: () => void
+  sede: Sede
+  onChangeSede: (s: Sede) => void
 }
 
 export function AppHeader({
