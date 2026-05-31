@@ -12,6 +12,8 @@ import {
   Help,
   Add
 } from '@carbon/icons-react'
+export type Sede = 'chia' | 'tocancipa'
+
 import type { Page } from '@renderer/App'
 
 interface AppHeaderProps {
@@ -71,9 +73,25 @@ export function AppHeader({
       </button>
 
       <div style={{ width: 1, height: 24, background: '#393939', margin: '0 4px' }} />
-      <span style={{ fontSize: 13, color: '#c6c6c6', padding: '0 12px', whiteSpace: 'nowrap' }}>
-        Sede Chapinero · Bogotá
-      </span>
+      <select
+        style={{
+          fontSize: 13,
+          color: '#c6c6c6',
+          padding: '0 12px',
+          background: 'transparent',
+          border: 'none',
+          cursor: 'pointer',
+          fontFamily: 'IBM Plex Sans',
+          outline: 'none'
+        }}
+      >
+        <option value="chia" style={{ background: '#161616', color: '#fff' }}>
+          Sede Centro Chía
+        </option>
+        <option value="tocancipa" style={{ background: '#161616', color: '#fff' }}>
+          Sede Tocancipá
+        </option>
+      </select>
 
       <div style={{ flex: 1 }} />
 

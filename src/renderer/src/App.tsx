@@ -1,6 +1,7 @@
 /* Vera Vision — App shell: routing, tema, overlays */
 import { useState } from 'react'
 import { AppHeader, AppSideNav } from '@renderer/components/layout/AppShell'
+import type { Sede } from '@renderer/components/layout/AppShell'
 import {
   Modal,
   SidePanel,
@@ -47,6 +48,7 @@ function App(): React.JSX.Element {
   const [modal, setModal] = useState(false)
   const [form, setForm] = useState<FormState>(FORM_INICIAL)
   const [toast, setToast] = useState<ToastData | null>(null)
+  const [sede, setSede] = useState<Sede>('chia')
 
   const fireToast = (x: ToastData): void => {
     setToast(x)
@@ -86,7 +88,8 @@ function App(): React.JSX.Element {
     onNav: nav,
     onCrear: abrirCrear,
     onAbrirCliente: setCliente,
-    fireToast
+    fireToast,
+    sede
   }
 
   return (
@@ -107,6 +110,8 @@ function App(): React.JSX.Element {
         onMenuClick={() => setNavOpen((o) => !o)}
         onLogoClick={() => nav('dashboard')}
         onNewReminder={abrirCrear}
+        sede={sede}
+        onChangeSede={setSede}
       />
 
       <div style={{ display: 'flex', flex: 1, minHeight: 0 }}>
@@ -131,7 +136,6 @@ function App(): React.JSX.Element {
         </main>
       </div>
 
-      {/* Panel lateral: perfil de cliente */}
       <SidePanel
         open={!!cliente}
         label="Cliente"
@@ -168,7 +172,6 @@ function App(): React.JSX.Element {
         {cliente && <ClienteDetalle cli={cliente} />}
       </SidePanel>
 
-      {/* Modal: nuevo recordatorio */}
       <Modal
         open={modal}
         label="Recordatorios"

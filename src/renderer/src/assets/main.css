@@ -1,10 +1,8 @@
 /* Vera Vision — estilos globales */
 @import '@carbon/styles/css/styles.css';
 
-/* IBM Plex desde Google Fonts — respaldo para ambientes sin acceso a CDN */
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,600;1,400&family=IBM+Plex+Serif:wght@300;400&display=swap');
 
-/* Reset mínimo para la app desktop */
 *,
 *::before,
 *::after {
@@ -16,13 +14,17 @@ body {
   margin: 0;
   padding: 0;
   height: 100%;
-  font-family: 'IBM Plex Sans', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family:
+    'IBM Plex Sans',
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    sans-serif;
   -webkit-font-smoothing: antialiased;
 }
 
 body {
   background: var(--cds-background, #f4f4f4);
-  /* Anula los estilos del boilerplate electron-vite */
   display: block !important;
   align-items: unset !important;
   justify-content: unset !important;
@@ -32,7 +34,6 @@ body {
 }
 
 #root {
-  /* Anula centrado del boilerplate */
   display: block !important;
   flex-direction: unset !important;
   align-items: unset !important;
@@ -71,13 +72,64 @@ input::placeholder {
   background: transparent;
 }
 
-/* Carbon theme data-attribute override — aplicado por App.tsx */
+/* ── Tema claro ─────────────────────────────────────────────────────────── */
 [data-carbon-theme='g10'] {
   --cds-background: #f4f4f4;
   --cds-layer-01: #ffffff;
+  --cds-layer-02: #f4f4f4;
+  --cds-layer-accent-01: #e0e0e0;
+  --cds-layer-hover-01: #e8e8e8;
+  --cds-layer-hover-02: #e0e0e0;
+  --cds-text-primary: #161616;
+  --cds-text-secondary: #525252;
+  --cds-text-helper: #6f6f6f;
+  --cds-text-placeholder: #a8a8a8;
+  --cds-text-error: #da1e28;
+  --cds-icon-primary: #161616;
+  --cds-icon-secondary: #525252;
+  --cds-border-subtle-01: #e0e0e0;
+  --cds-border-strong-01: #8d8d8d;
+  --cds-border-interactive: #0f62fe;
+  --cds-field-01: #f4f4f4;
+  --cds-link-primary: #0f62fe;
+  --cds-support-success: #24a148;
+  --cds-support-error: #da1e28;
+  --cds-support-warning: #f1c21b;
+  --cds-support-info: #0043ce;
+  --cds-overlay: rgba(22, 22, 22, 0.5);
+  --cds-shadow: rgba(0, 0, 0, 0.3);
+  --cds-background-hover: #e8e8e8;
+  --cds-focus: #0f62fe;
+  --cds-highlight: #d0e2ff;
 }
 
+/* ── Tema oscuro ────────────────────────────────────────────────────────── */
 [data-carbon-theme='g100'] {
   --cds-background: #161616;
   --cds-layer-01: #262626;
+  --cds-layer-02: #393939;
+  --cds-layer-accent-01: #393939;
+  --cds-layer-hover-01: #333333;
+  --cds-layer-hover-02: #474747;
+  --cds-text-primary: #f4f4f4;
+  --cds-text-secondary: #c6c6c6;
+  --cds-text-helper: #8d8d8d;
+  --cds-text-placeholder: #6f6f6f;
+  --cds-text-error: #ff8389;
+  --cds-icon-primary: #f4f4f4;
+  --cds-icon-secondary: #c6c6c6;
+  --cds-border-subtle-01: #393939;
+  --cds-border-strong-01: #6f6f6f;
+  --cds-border-interactive: #4589ff;
+  --cds-field-01: #2d2d2d;
+  --cds-link-primary: #78a9ff;
+  --cds-support-success: #42be65;
+  --cds-support-error: #ff8389;
+  --cds-support-warning: #f1c21b;
+  --cds-support-info: #4589ff;
+  --cds-overlay: rgba(0, 0, 0, 0.65);
+  --cds-shadow: rgba(0, 0, 0, 0.6);
+  --cds-background-hover: #333333;
+  --cds-focus: #4589ff;
+  --cds-highlight: #001d6c;
 }

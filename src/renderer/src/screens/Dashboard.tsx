@@ -26,22 +26,45 @@ import {
 import type { Cliente } from '@renderer/data/types'
 import type { Page } from '@renderer/App'
 
+const SEDE_KPI: Record<string, typeof VV_KPI> = {
+  chia: VV_KPI,
+  tocancipa: {
+    ...VV_KPI,
+    activos: 98,
+    activosDelta: 5,
+    riesgo: 21,
+    riesgoCrit: 2,
+    pendientes: 9,
+    programados: 7,
+    tasaRespuesta: 41,
+    tasaDelta: 8
+  }
+}
+
 interface DashboardProps {
   onNav: (p: Page) => void
   onCrear: () => void
   onAbrirCliente: (cli: Cliente) => void
+  sede?: string
+  fireToast?: (x: unknown) => void
 }
 
-export function Dashboard({ onNav, onCrear, onAbrirCliente }: DashboardProps): React.JSX.Element {
-  const k = VV_KPI
+export function Dashboard({
+  onNav,
+  onCrear,
+  onAbrirCliente,
+  sede = 'chia'
+}: DashboardProps): React.JSX.Element {
+  const k = SEDE_KPI[sede] ?? VV_KPI
   const atencion = VV_RECORDATORIOS.filter((r) => r.estado === 'pendiente').slice(0, 4)
   const reciente = VV_HISTORIAL.slice(0, 5)
+  const sedeLabel = sede === 'tocancipa' ? 'Sede Tocancipá' : 'Sede Centro · Chía'
 
   return (
     <div>
       <PageHeader
         title="Inicio"
-        helper="Resumen de actividad y relación con clientes · 22 de abril, 2026"
+        helper={`Resumen de actividad y relación con clientes · ${sedeLabel} · 22 de abril, 2026`}
       >
         <Btn kind="tertiary" size="md" iconLeft={<Download size={16} />}>
           Exportar
@@ -66,7 +89,7 @@ export function Dashboard({ onNav, onCrear, onAbrirCliente }: DashboardProps): R
           value={k.activos}
           delta={`${k.activosDelta} este mes`}
           deltaDir="up"
-          spark={[120, 124, 128, 131, 136, 142]}
+          spark={[120, 124, 128, 131, 136, k.activos]}
           sparkColor="#0f62fe"
         />
         <MetricTile
@@ -74,14 +97,14 @@ export function Dashboard({ onNav, onCrear, onAbrirCliente }: DashboardProps): R
           value={k.riesgo}
           foot={`${k.riesgoCrit} críticos`}
           accent="var(--cds-support-warning)"
-          spark={[44, 42, 41, 40, 39, 38]}
+          spark={[44, 42, 41, 40, 39, k.riesgo]}
           sparkColor="var(--cds-support-warning)"
         />
         <MetricTile
           label="Recordatorios pendientes"
           value={k.pendientes}
           foot={`${k.programados} programados`}
-          spark={[9, 11, 10, 13, 14, 15]}
+          spark={[9, 11, 10, 13, 14, k.pendientes]}
           sparkColor="#0f62fe"
         />
         <MetricTile
@@ -90,7 +113,7 @@ export function Dashboard({ onNav, onCrear, onAbrirCliente }: DashboardProps): R
           unit="%"
           delta={`${k.tasaDelta}%`}
           deltaDir="up"
-          spark={[26, 28, 27, 30, 32, 34]}
+          spark={[26, 28, 27, 30, 32, k.tasaRespuesta]}
           sparkColor="var(--cds-support-success)"
         />
       </div>
@@ -177,11 +200,7 @@ export function Dashboard({ onNav, onCrear, onAbrirCliente }: DashboardProps): R
                   />
                   <div style={{ flex: 1, minWidth: 0 }}>
                     <div
-                      style={{
-                        fontSize: 14,
-                        fontWeight: 600,
-                        color: 'var(--cds-text-primary)'
-                      }}
+                      style={{ fontSize: 14, fontWeight: 600, color: 'var(--cds-text-primary)' }}
                     >
                       {cli.nombre}
                     </div>
@@ -245,11 +264,7 @@ export function Dashboard({ onNav, onCrear, onAbrirCliente }: DashboardProps): R
                   />
                   <div style={{ flex: 1, minWidth: 0 }}>
                     <div
-                      style={{
-                        fontSize: 14,
-                        fontWeight: 600,
-                        color: 'var(--cds-text-primary)'
-                      }}
+                      style={{ fontSize: 14, fontWeight: 600, color: 'var(--cds-text-primary)' }}
                     >
                       {cli.nombre}
                     </div>
