@@ -88,7 +88,7 @@ function App(): React.JSX.Element {
     onNav: nav,
     onCrear: abrirCrear,
     onAbrirCliente: setCliente,
-    fireToast,
+    fireToast: (x: unknown) => fireToast(x as ToastData),
     sede
   }
 
